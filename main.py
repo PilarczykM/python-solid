@@ -1,5 +1,5 @@
 from order import Order
-from payment import DebitPaymentProcessor, CreditPaymentProcessor
+from payment import BlikPaymentProcessor, CreditPaymentProcessor, DebitPaymentProcessor
 
 
 def main():
@@ -14,6 +14,9 @@ def main():
     processor.pay(order, "123456")
 
     processor = CreditPaymentProcessor
+    processor.pay(order, "123456")
+
+    processor = BlikPaymentProcessor
     processor.pay(order, "123456")
 
 

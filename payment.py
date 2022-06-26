@@ -22,3 +22,11 @@ class CreditPaymentProcessor(PaymentProcessor):
         print("Processing credit payment type")
         print(f"Verifying security code: {security_code}")
         order.set_paid_status()
+
+
+class BlikPaymentProcessor(PaymentProcessor):
+    @staticmethod
+    def pay(order, security_code):
+        print("Processing blik payment type")
+        print(f"Verifying security code: {security_code}")
+        order.set_paid_status()
