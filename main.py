@@ -1,4 +1,5 @@
-from solid import Order
+from order import Order
+from payment import pay_debit
 
 
 def main():
@@ -8,7 +9,8 @@ def main():
     order.add_item("USB cable", 3, 5)
 
     print(order.total_price())
-    order.pay("debit", "123456")
+
+    pay_debit(order, "123456")
 
 
 if __name__ == '__main__':
