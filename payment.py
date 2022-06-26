@@ -1,32 +1,38 @@
 from order import Order
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
 class PaymentProcessor(ABC):
-    @staticmethod
-    def pay(order: Order, security_code: str):
+    @abstractmethod
+    def pay(self, order: Order):
         pass
 
 
 class DebitPaymentProcessor(PaymentProcessor):
-    @staticmethod
-    def pay(order, security_code):
+    def __init__(self, security_code):
+        self.security_code = security_code
+
+    def pay(self, order):
         print("Processing debit payment type")
-        print(f"Verifying security code: {security_code}")
+        print(f"Verifying security code: {self.security_code}")
         order.set_paid_status()
 
 
 class CreditPaymentProcessor(PaymentProcessor):
-    @staticmethod
-    def pay(order, security_code):
+    def __init__(self, security_code):
+        self.security_code = security_code
+
+    def pay(self, order):
         print("Processing credit payment type")
-        print(f"Verifying security code: {security_code}")
+        print(f"Verifying security code: {self.security_code}")
         order.set_paid_status()
 
 
 class BlikPaymentProcessor(PaymentProcessor):
-    @staticmethod
-    def pay(order, security_code):
+    def __init__(self, blik_code: str):
+        self.blik_code = blik_code
+
+    def pay(self, order):
         print("Processing blik payment type")
-        print(f"Verifying security code: {security_code}")
+        print(f"Verifying blik code: {self.blik_code}")
         order.set_paid_status()
