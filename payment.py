@@ -3,14 +3,26 @@ from abc import ABC, abstractmethod
 
 
 class PaymentProcessor(ABC):
+
     @abstractmethod
     def pay(self, order: Order):
         pass
 
 
-class DebitPaymentProcessor(PaymentProcessor):
+class PaymentProcessorSMS(PaymentProcessor):
+    @abstractmethod
+    def auth_sms(self, code):
+        pass
+
+
+class DebitPaymentProcessor(PaymentProcessorSMS):
     def __init__(self, security_code):
         self.security_code = security_code
+        self.verified = False
+
+    def auth_sms(self, code):
+        print(f"Verifying SMS code: {code}")
+        self.verified = True
 
     def pay(self, order):
         print("Processing debit payment type")
@@ -18,9 +30,14 @@ class DebitPaymentProcessor(PaymentProcessor):
         order.set_paid_status()
 
 
-class CreditPaymentProcessor(PaymentProcessor):
+class CreditPaymentProcessor(PaymentProcessorSMS):
     def __init__(self, security_code):
         self.security_code = security_code
+        self.verified = False
+
+    def auth_sms(self, code):
+        print(f"Verifying SMS code: {code}")
+        self.verified = True
 
     def pay(self, order):
         print("Processing credit payment type")
