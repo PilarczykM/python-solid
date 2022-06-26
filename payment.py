@@ -1,13 +1,32 @@
 from order import Order
+from abc import ABC
 
 
-def pay_debit(order: Order, security_code: str) -> None:
-    print("Processing debit payment type")
-    print(f"Verifying security code: {security_code}")
-    order.set_paid_status()
+class PaymentProcessor(ABC):
+    @staticmethod
+    def pay(order: Order, security_code: str):
+        pass
 
 
-def pay_credit(order, security_code: str) -> None:
-    print("Processing credit payment type")
-    print(f"Verifying security code: {security_code}")
-    order.set_paid_status()
+class DebitPaymentProcessor(PaymentProcessor):
+    @staticmethod
+    def pay(order, security_code):
+        print("Processing debit payment type")
+        print(f"Verifying security code: {security_code}")
+        order.set_paid_status()
+
+
+class CreditPaymentProcessor(PaymentProcessor):
+    @staticmethod
+    def pay(order, security_code):
+        print("Processing credit payment type")
+        print(f"Verifying security code: {security_code}")
+        order.set_paid_status()
+
+
+class BlikPaymentProcessor(PaymentProcessor):
+    @staticmethod
+    def pay(order, security_code):
+        print("Processing blik payment type")
+        print(f"Verifying security code: {security_code}")
+        order.set_paid_status()
