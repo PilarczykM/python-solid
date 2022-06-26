@@ -1,5 +1,5 @@
 from order import Order
-from payment import pay_debit
+from payment import DebitPaymentProcessor, CreditPaymentProcessor
 
 
 def main():
@@ -10,7 +10,11 @@ def main():
 
     print(order.total_price())
 
-    pay_debit(order, "123456")
+    processor = DebitPaymentProcessor
+    processor.pay(order, "123456")
+
+    processor = CreditPaymentProcessor
+    processor.pay(order, "123456")
 
 
 if __name__ == '__main__':
