@@ -10,14 +10,14 @@ def main():
 
     print(order.total_price())
 
-    processor = DebitPaymentProcessor
-    processor.pay(order, "123456")
+    processor = DebitPaymentProcessor("123456")
+    processor.pay(order)
 
-    processor = CreditPaymentProcessor
-    processor.pay(order, "123456")
+    processor = CreditPaymentProcessor("123456")
+    processor.pay(order)
 
-    processor = BlikPaymentProcessor
-    processor.pay(order, "123456")
+    processor = BlikPaymentProcessor("1234")
+    processor.pay(order)
 
 
 if __name__ == '__main__':
